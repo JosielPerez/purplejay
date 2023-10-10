@@ -1,0 +1,122 @@
+.main {
+  height: 100vh;
+  background: #242626;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #f4eded;
+}
+.title_form {
+  color: #f4eded;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 16px;
+}
+
+.form_container {
+  height: 530px;
+  width: 445px;
+  background-color: #734fc0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form_content {
+  padding: 24px;
+  gap: 16px;
+}
+
+.input_group {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.input_name {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  color: #f4eded;
+  display: block;
+}
+
+.input_group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #340347;
+  border-radius: 12px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #d9d9d9;
+  font-size: 14px;
+  color: #1a032e;
+}
+
+.checkbox_group {
+  display: flex;
+  margin-top: 24px;
+  align-items: start;
+  gap: 12px;
+}
+
+.checkbox_group input {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #9c18c4;
+  border-radius: 4px;
+  color: #600b82;
+}
+
+.checkbox_name {
+  color: #bec5d0;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+}
+.terms_name {
+  color: #242626;
+  font-weight: 600;
+}
+.terms_name:hover {
+  text-decoration: underline;
+}
+
+.button {
+  width: 100%;
+  margin: 24px 0px 0px 0px;
+  padding: 10px 24px;
+  background-color: #242626;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(80%);
+}
+
+.account_name {
+  margin-top: 24px;
+  color: #bec5d0;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+}
+
+.p {
+  font-size: 14px;
+  color: #a0aec0;
+}
