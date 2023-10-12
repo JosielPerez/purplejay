@@ -7,6 +7,7 @@
 .landing_title {
   margin: 30px 0px 0px 40px;
   display: flex;
+  margin-bottom: 20px;
 }
 
 .small_rectangle {
@@ -33,6 +34,42 @@
   font-size: 32px;
   width: 175px;
 }
+.main_content {
+  height: 500px;
+  width: 100vw;
+  display: flex;
+  margin-top: 50px;
+}
+.first_half_main_content {
+  display: flex;
+  flex-direction: column;
+}
+.text_container {
+  margin-left: 40px;
+}
+.text_big {
+  color: #f4eded;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  width: 100%;
+  font-size: 60px;
+  margin: 30px 0px 20px;
+}
+.text_small {
+  color: #f4eded;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.text_description {
+  width: 600px;
+  color: #cfcdcd;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 
 .button_containers {
   width: 500px;
@@ -42,6 +79,12 @@
   gap: 50px;
 }
 
+.img_container {
+  height: 100%;
+  width: 50%;
+  background-color: #8856f2;
+  margin-left: 14px;
+}
 .sign_up {
   cursor: pointer;
   width: 200px;

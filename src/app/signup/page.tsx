@@ -12,7 +12,7 @@ export default function SignUp() {
           </Link>
           <div className={styles.form_container}>
             <div className={styles.form_content}>
-              <h1 className={styles.title_form}>Create and account</h1>
+              <h1 className={styles.title_form}>Create an account</h1>
               <form action="#">
                 <div className={styles.input_group}>
                   <label className={styles.input_name} htmlFor="email">
