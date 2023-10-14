@@ -33,7 +33,24 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.img_container}></div>
+        <div className={styles.img_container}>
+          <Image
+            className={styles.logo}
+            src="/desktop.png"
+            alt="desktop"
+            width={800}
+            height={600}
+            priority
+          />
+          <Image
+            className={styles.ipad_logo}
+            src="/ipad.png"
+            alt="ipad"
+            width={550}
+            height={400}
+            priority
+          />
+        </div>
       </div>
     </main>
   );

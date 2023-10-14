@@ -8,6 +8,7 @@ export default function SignUp() {
       <section className={styles.main}>
         <div className={styles.container}>
           <Link href="/" className={styles.brand}>
+            <img className={styles.logo} src="/logo.png" alt="logo" />
             PurpleJay
           </Link>
           <div className={styles.form_container}>
@@ -36,6 +37,7 @@ export default function SignUp() {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    color="#D9D9D9"
                     required
                   />
                 </div>

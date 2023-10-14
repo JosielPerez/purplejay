@@ -38,7 +38,7 @@
   height: 500px;
   width: 100vw;
   display: flex;
-  margin-top: 50px;
+  margin: 50px 0px 0px 0px;
 }
 .first_half_main_content {
   display: flex;
@@ -81,9 +81,17 @@
 
 .img_container {
   height: 100%;
-  width: 50%;
-  background-color: #8856f2;
-  margin-left: 14px;
+  width: 400px;
+  position: relative;
+}
+
+.logo {
+  display: block;
+  transform: translate(250px, 0px);
+}
+.ipad_logo {
+  position: absolute;
+  transform: translate(0px, -400px);
 }
 .sign_up {
   cursor: pointer;
