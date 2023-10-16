@@ -8,11 +8,12 @@ export default function SignUp() {
       <section className={styles.main}>
         <div className={styles.container}>
           <Link href="/" className={styles.brand}>
+            <img className={styles.logo} src="/logo.png" alt="logo" />
             PurpleJay
           </Link>
           <div className={styles.form_container}>
             <div className={styles.form_content}>
-              <h1 className={styles.title_form}>Create and account</h1>
+              <h1 className={styles.title_form}>Create an account</h1>
               <form action="#">
                 <div className={styles.input_group}>
                   <label className={styles.input_name} htmlFor="email">
@@ -36,6 +37,7 @@ export default function SignUp() {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    color="#D9D9D9"
                     required
                   />
                 </div>
