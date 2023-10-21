@@ -10,6 +10,11 @@
   padding: 48px 24px;
   margin: 0 auto;
 }
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-right: 8px;
+}
 
 .brand {
   display: flex;

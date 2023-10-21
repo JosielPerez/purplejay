@@ -1,0 +1,166 @@
+.main {
+  height: 100vh;
+  background: #242626;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-right: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #f4eded;
+}
+
+.form_container {
+  height: 430px;
+  width: 445px;
+  background-color: #734fc0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form_content {
+  padding: 24px;
+  gap: 24px;
+}
+.title_form {
+  color: #f4eded;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 24px;
+}
+
+.input_group {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.input_name {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #f4eded;
+  display: block;
+}
+
+.input_group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #340347;
+  border-radius: 12px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #d9d9d9;
+  font-size: 14px;
+  color: #1a032e;
+}
+
+.flex_group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox_group {
+  display: flex;
+
+  align-items: start;
+  gap: 12px;
+}
+
+.checkbox_group input {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkbox_group label {
+  font-size: 16px;
+  color: #a0aec0;
+}
+
+.remember_me {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  color: #f4eded;
+  display: block;
+}
+
+.forgot_password {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #242626;
+  text-decoration: none;
+}
+
+.forgot_password:hover {
+  text-decoration: underline;
+}
+
+.button {
+  width: 100%;
+  margin: 24px 0px 0px 0px;
+  padding: 10px 24px;
+  background-color: #242626;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: #f4eded;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(80%);
+}
+
+.account {
+  margin-top: 24px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #f4eded;
+}
+
+.signup_name {
+  color: #242626;
+  font-size: 16px;
+}
+.signup_name:hover {
+  text-decoration: underline;
+}
+
+.p {
+  font-size: 14px;
+  color: #a0aec0;
+}
+
+.a {
+  color: #4299e1;
+  text-decoration: none;
+}
+
+.a:hover {
+  text-decoration: underline;
+}
