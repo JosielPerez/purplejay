@@ -10,7 +10,7 @@ function LogOut() {
     signOut(auth)
       .then(() => {
         // Successfully signed out.
-        router.push("/login"); // or redirect to any other page, e.g., homepage.
+        router.push("/login");
       })
       .catch((error) => {
         console.log("Sign-out error:", error.message);
