@@ -11,7 +11,7 @@ function NavBar() {
             <Link href="dashboard" className='active'>Dashboard</Link>
           </li>
           <li>
-            <Link href="/portfolio">Porfolio</Link>
+            <Link href="/portfolio">Portfolio</Link>
           </li>
           <li>
             <Link href="/achievement">Achievement</Link>

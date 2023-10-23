@@ -1,0 +1,10 @@
+.stocklist {
+  width: 20%;
+  height: 95%;
+  display: block;
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  left: 200px;
+  border: 1px solid #C3C3C3;
+  }

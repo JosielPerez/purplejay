@@ -1,0 +1,23 @@
+
+.stock {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0 0.5rem 0.25rem;
+    background-color: #f8f8ff;
+    border-bottom: 1px solid #C3C3C3;
+  }
+  
+  .trend-up {
+    width: 48px;
+    min-width: 48px;
+    height: 36px;
+    color: #0ee3b8;
+  }
+  
+  .trend-down {
+    width: 48px;
+    min-width: 48px;
+    height: 36px;
+    color: #ff2400;
+  }
+  
