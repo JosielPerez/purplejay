@@ -1,10 +1,12 @@
+//@ts-nocheck
 import React from 'react';
-import dynamic from "next/dynamic";
-const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
+import Plot from 'react-plotly.js';
+import './style.css'
+import Buy from '../buy/Buy';
 
 
-class StockGraph extends React.Component <any,any>{
-  constructor(props:any) {
+class StockGraph extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       stockChartXValues: [],
@@ -12,58 +14,67 @@ class StockGraph extends React.Component <any,any>{
     }
   }
 
-  componentDidMount() {
-    this.fetchStock();
-  }
+  // componentDidMount() {
+  //   this.fetchStock();
+  // }
 
-  fetchStock() {
-    const pointerToThis = this;
-    console.log(pointerToThis);
-    const API_KEY = 'NF6LXRYWSZLD6W5D';
-    let StockSymbol = 'IBM';
-    let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`;
-    let stockChartXValuesFunction : any = [];
-    let stockChartYValuesFunction : any = [];
+  // fetchStock() {
+  //   const pointerToThis = this;
+  //   console.log(pointerToThis);
+  //   const API_KEY = 'NF6LXRYWSZLD6W5D';
+  //   let StockSymbol = 'AAPL';
+  //   let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${StockSymbol}&apikey=${API_KEY}`;
+  //   let stockChartXValuesFunction : any = [];
+  //   let stockChartYValuesFunction : any = [];
 
-    fetch(API_Call)
-      .then(
-        function(response) {
-          return response.json();
-        }
-      )
-      .then(
-        function(data) {
-          console.log(data);
+  //   fetch(API_Call)
+  //     .then(
+  //       function(response) {
+  //         return response.json();
+  //       }
+  //     )
+  //     .then(
+  //       function(data) {
+  //         console.log(data);
 
-          for (var key in data['Time Series (Daily)']) {
-            stockChartXValuesFunction.push(key);
-            stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
-          }
+  //         for (let key in data['Time Series (Daily)']) {
+  //           stockChartXValuesFunction.push(key);
+  //           stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
+  //         }
 
-          // console.log(stockChartXValuesFunction);
-          pointerToThis.setState({
-            stockChartXValues: stockChartXValuesFunction,
-            stockChartYValues: stockChartYValuesFunction
-          });
-        }
-      )
-  }
+  //         console.log(stockChartXValuesFunction);
+  //         pointerToThis.setState({
+  //           stockChartXValues: stockChartXValuesFunction,
+  //           stockChartYValues: stockChartYValuesFunction
+  //         });
+  //       }
+  //     )
+  // }
 
   render() {
     return (
       <div>
-        <h1>Stock Market</h1>
-        <Plot
+        <Plot className='ticker' 
           data={[
             {
               x: this.state.stockChartXValues,
               y: this.state.stockChartYValues,
               type: 'scatter',
               mode: 'lines+markers',
-              marker: {color: 'red'},
+              marker: {color: '#6237a0'},
             }
           ]}
-          layout={{width: 720, height: 440, title: 'A Fancy Plot'}}
+          layout={
+            {
+            width: 680, 
+            height: 350,
+            yaxis: {title:'', showticklabels: false,},
+            margin: {
+              t: 40,
+              l: 0, 
+            },
+            title:'AAPL'
+          }}
         />
       </div>
     )

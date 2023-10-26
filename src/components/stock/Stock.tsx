@@ -9,9 +9,9 @@ function Stock({stock}: StockItem) {
         <b>{stock.symbol}</b> <span>${stock.price}</span>
         
         {(stock.change >= 0) ? 
-            (<FontAwesomeIcon className= "trend-up" icon={faCaretUp} />) 
+            (<FontAwesomeIcon id= "trend-up" icon={faCaretUp} />) 
                 : 
-            (<FontAwesomeIcon  className= "trend-down" icon={faCaretDown} />)
+            (<FontAwesomeIcon  id= "trend-down" icon={faCaretDown} />)
         }
         
     </li>
