@@ -77,9 +77,12 @@ export default function LogIn() {
                       Remember me
                     </label>
                   </div>
-                  <a href="#" className={styles.forgot_password}>
+                  <Link
+                    href="/forgotpassword"
+                    className={styles.forgot_password}
+                  >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   onClick={() => login()}
