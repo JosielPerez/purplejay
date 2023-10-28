@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client';
 import Buy from '@/components/buy/Buy';
 import StockGraph from '@/components/stockgraph/StockGraph';
@@ -5,13 +6,92 @@ import StockList from '@/components/stocklist/StockList'
 import React, {useEffect, useState} from 'react'
 import styles from './styles.module.css'
 import Sell from '@/components/sell/Sell';
+import TimeRange from '@/components/timerange/TimeRange';
 
 
 function Dashboard() {
   const API_KEY = 'NF6LXRYWSZLD6W5D';
   let stockSymbols = ['AAPL','IBM','AMZN']
+
   const[openBuyModal,setBuyModal] = useState(false)
-  const[openSellModal,setSellModal] = useState(true)
+  const[openSellModal,setSellModal] = useState(false)
+
+  const [stockChartXValues, setStockChartXValues] = useState([]);
+  const [stockChartYValues, setStockChartYValues] = useState([]);
+
+  
+  let current = new Date();
+  let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
+  var endTime = cDate;
+  var startTime = '';
+  cDate = current.getFullYear() + '-' + (current.getMonth()+1) + '-' + (current.getDate()-1);
+  startTime = cDate;
+
+  const[timeOption,setTimeOption] = useState([startTime,endTime])
+  
+    useEffect(() => {
+      fetchStock();
+    }, []);
+
+    const fetchStock = async () => {
+      try {
+        const API_KEY = 'YOUR_API_KEY'; // Replace with your API key
+        const StockSymbol = 'AAPL'; // Replace with the desired stock symbol
+        const API_Call = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=demo';
+  
+        const stockChartXValuesFunction = [];
+        const stockChartYValuesFunction = [];
+  
+        const response = await fetch(API_Call);
+  
+        if (!response.ok) {
+          throw new Error(`API request failed with status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+  
+        for (let key in data['Time Series (5min)']) {
+          stockChartXValuesFunction.push(key);
+          stockChartYValuesFunction.push(data['Time Series (5min)'][key]['1. open']);
+        }
+  
+        setStockChartXValues(stockChartXValuesFunction);
+        setStockChartYValues(stockChartYValuesFunction);
+      } catch (error) {
+        console.error('Error fetching stock data:', error);
+      }
+    };
+  
+ 
+
+  function selectTimeOption(option){
+
+    if(option === '1D')
+    {
+      cDate = current.getFullYear() + '-' + (current.getMonth()+1) + '-' + (current.getDate()-1);
+      startTime = cDate;
+      setTimeOption([startTime,endTime])
+    }
+    else if(option === '1W')
+    {
+      cDate = current.getFullYear() + '-' + (current.getMonth()+1) + '-' + (current.getDate()-7);
+      startTime = cDate;
+      setTimeOption([startTime,endTime])
+    }
+    else if(option === '1M')
+    {
+      cDate = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate();
+      startTime = cDate;
+      setTimeOption([startTime,endTime])
+    }
+    else if(option === '3M')
+    {
+      cDate = current.getFullYear() + '-' + (current.getMonth()-2) + '-' + current.getDate();
+      startTime = cDate
+      setTimeOption([startTime,endTime])
+    }
+  }
+
 
   // const[stocks,setStocks] = useState([])
 
@@ -75,11 +155,15 @@ function Dashboard() {
 
     }
   ]
-  
+  console.log(timeOption)
+
   return (
     <>
       <StockList stocks = {stocks}/>
-      <StockGraph/>
+      <StockGraph stockChartXValues ={stockChartXValues} stockChartYValues ={stockChartYValues}
+      timeOption={timeOption}      
+      />
+      <TimeRange selectTimeOption ={selectTimeOption}/>
       <button 
       className={styles.stock_buy}
       onClick={()=>{
