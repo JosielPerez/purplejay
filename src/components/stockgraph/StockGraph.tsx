@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import './style.css';
 
-function StockGraph({stockChartXValues, stockChartYValues, 
-  timeOption}) {
+function StockGraph({stockChartXValues, stockChartYValues, timeOption, title, price}) {
 
   return (
     <div>
@@ -26,10 +25,20 @@ function StockGraph({stockChartXValues, stockChartYValues,
             t: 40,
             l: 0,
           },
-          title: 'AAPL',
+          title: {
+            text: title + '   ' + '$'+price,
+            x: 0.04,
+            font:{
+              size: 26,
+              color: '#6237a0'
+            },
+            y:0.975,
+            
+          },
           xaxis: {
             range:timeOption,
-            type:'date'
+            type:'date',
+            color: '#6237a0'
           },
         }}
         config={{ displayModeBar: false }}
