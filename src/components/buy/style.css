@@ -45,3 +45,24 @@ form{
 {
     background-color:  #C3C3C3;
 }
+#confirm_button{
+    position: absolute;
+    left: 148px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+    color: white;
+    background-color:  #6237a0;
+}
+#back_button
+{
+    position: absolute;
+    left: 0px;
+    width: 50px;
+    cursor: pointer;
+    color: #6237a0;
+
+}
