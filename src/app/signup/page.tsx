@@ -18,7 +18,7 @@ export default function SignUp() {
         // Signed in
         const user = userCredential.user;
         console.log("User created: ", user);
-
+        alert("Account Created!");
         // Redirect to another page after successful signup
         router.push("/"); // or your desired route
       })
