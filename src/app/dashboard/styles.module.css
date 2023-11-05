@@ -1,4 +1,27 @@
 .main {
-    display: grid;
-    justify-content: space-around;
+  display: grid;
+  justify-content: space-around;
+}
+
+.loading {
+  height: 100vh;
+  background: #242626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo_spinner {
+  animation: spin 2s linear infinite;
+  height: 100px; /* Or whatever size you want */
+  width: 100px; /* Or whatever size you want */
 }
