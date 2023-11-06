@@ -5,20 +5,23 @@
     padding: 0.5rem 0 0.5rem 0.25rem;
     background-color: #f8f8ff;
     border-bottom: 1px solid #C3C3C3;
+<<<<<<< HEAD
     height: 50px;
     cursor: pointer;
+=======
+>>>>>>> main
   }
   
-  #trend-up {
-    width: 46px;
-    min-width: 44px;
+  .trend-up {
+    width: 48px;
+    min-width: 48px;
     height: 36px;
     color: #0ee3b8;
   }
   
-  #trend-down {
-    width: 46px;
-    min-width: 44px;
+  .trend-down {
+    width: 48px;
+    min-width: 48px;
     height: 36px;
     color: #ff2400;
   }

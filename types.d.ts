@@ -7,9 +7,14 @@ type StockItem = {
         price: number,
         volume:	number,
         change:	number,
+<<<<<<< HEAD
         change_percent:	string,
         shares_owned: number
     },
+=======
+        change_percent:	string
+    }
+>>>>>>> main
 }
 type StockItemList = {
     stocks: {
@@ -20,7 +25,6 @@ type StockItemList = {
         price: number,
         volume:	number,
         change:	number,
-        change_percent:	string,
-        shares_owned: number
+        change_percent:	string
     }[]
 }

@@ -10,9 +10,9 @@ function Stock({stock, setTickerStock}: any) {
         <b>{stock.symbol}</b> <span>{(stock.shares_owned).toFixed(2) + ' shares'}</span>
         
         {(stock.change >= 0) ? 
-            (<FontAwesomeIcon id= "trend-up" icon={faCaretUp} />) 
+            (<FontAwesomeIcon className= "trend-up" icon={faCaretUp} />) 
                 : 
-            (<FontAwesomeIcon  id= "trend-down" icon={faCaretDown} />)
+            (<FontAwesomeIcon  className= "trend-down" icon={faCaretDown} />)
         }
         
     </li>
