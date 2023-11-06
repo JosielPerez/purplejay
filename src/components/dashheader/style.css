@@ -1,0 +1,26 @@
+.dash_header_bar{
+    position: static;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    font-size: 0;
+    background-color: #6237a0;
+}
+
+.searchForm {
+    position: absolute;
+    left: 38%;
+    width: 520px;
+    height: 38px;
+    margin: 0.25rem 0 0;
+    padding: 0 0.5rem 0.25rem;
+  }
+  
+  .searchForm input[type='text'] {
+    max-width: 100%;
+    min-height: 25px;
+    font-size: 16.5px;
+    padding: 0.5rem;
+    margin-bottom: 5px;
+    outline: none;
+  }

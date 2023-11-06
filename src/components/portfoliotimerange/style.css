@@ -1,0 +1,33 @@
+.time_nav {
+    display: flex;
+    position: absolute;
+    left: 58%;
+    top: 7%;
+    list-style: none;
+  }
+  
+  /* Style the links inside the option bar */
+  .time_nav li {
+    color:  #6237a0;
+    text-align: center;
+    padding: 8px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  
+  /* Change the color of time option on hover */
+  .time_nav li:hover {
+    background-color: #f8f8ff;
+    color:  #6237a0;
+    border: 1px solid #C3C3C3;
+    border-radius: 2px;
+  }
+  
+  /* Add a color to the active/current time option*/
+  .time_nav li.active {
+    background-color:  #CBC3E3;
+    color:  white;
+    border: 1px solid #C3C3C3;
+    border-radius: 2px;
+  }
