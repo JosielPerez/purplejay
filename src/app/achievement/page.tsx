@@ -103,7 +103,7 @@ export default function achievement() {
 
             {/* Achievement Number */}
             <div className={styles.achievement_number}>
-                <h1>1/10</h1> {/*need to modify somehow*/}
+                <h1>5/10</h1> {/*need to modify somehow*/}
             </div>
 
             {/* Achievements Content */}
@@ -116,7 +116,7 @@ export default function achievement() {
                 desc1="You got the first asset"
                 isDone1={true}
                 src2="/achievement1.png"
-                name2="Something Longer Sentence"
+                name2="Achievement2"
                 desc2="Fortune 500 company"
                 isDone2={false}
                 />
@@ -125,11 +125,11 @@ export default function achievement() {
                 {/* 2nd row */}
                 <Row 
                 src1="/achievement1.png" 
-                name1="WANAWANA" 
+                name1="Achievement3" 
                 desc1="You earned $1,000"
                 isDone1={true}
                 src2="/achievement1.png"
-                name2="OkieDokie"
+                name2="Achievement4"
                 desc2="Crypto"
                 isDone2={true}
                 />
@@ -138,11 +138,11 @@ export default function achievement() {
                 {/* 3rd row */}
                 <Row 
                 src1="/achievement1.png" 
-                name1="Samurai Sword" 
+                name1="Achievement5" 
                 desc1="You have earned $10,000"
                 isDone1={false}
                 src2="/achievement1.png"
-                name2="Why Japanese People"
+                name2="Achievement6"
                 desc2="Tech Company"
                 isDone2={true}
                 />
@@ -151,11 +151,11 @@ export default function achievement() {
                 {/* 4th row */}
                 <Row 
                 src1="/achievement1.png" 
-                name1="Amaozon Prime" 
+                name1="Achievement7" 
                 desc1="You have earned $50,000"
                 isDone1={false}
                 src2="/achievement1.png"
-                name2="Netflix Killer"
+                name2="Achievement8"
                 desc2="Health stock"
                 isDone2={false}
                 />
@@ -164,11 +164,11 @@ export default function achievement() {
                 {/* 5th row */}
                 <Row 
                 src1="/achievement1.png" 
-                name1="Legend of Zelda" 
+                name1="Achievement9" 
                 desc1="You have earned $100,000"
-                isDone1={true}
+                isDone1={false}
                 src2="/achievement1.png"
-                name2="It's Great Game"
+                name2="Achievement10"
                 desc2="Foreign stock"
                 isDone2={true}
                 />
