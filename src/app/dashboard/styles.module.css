@@ -1,23 +1,23 @@
 .main {
-  display: grid;
-  justify-content: space-around;
+    display: grid;
+    justify-content: space-around;
 }
-.stock_buy {
-  width: 90px;
-  height: 40px;
-  position: absolute;
-  left: 65%;
-  top: 58%;
-  padding: 10px;
-  margin: 8px;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  background-color: #6237a0;
+.stock_buy{
+    
+    width: 90px;
+    height:40px; 
+    position: absolute;
+    left:65%;
+    top: 58%;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color:  #6237a0;
 }
 
-<<<<<<< HEAD
 .stock_sell{
     
     width: 90px;
@@ -39,19 +39,3 @@
     background-color: #C3C3C3;
     cursor: not-allowed;
 }
-=======
-.stock_sell {
-  width: 90px;
-  height: 40px;
-  position: absolute;
-  left: 75%;
-  top: 58%;
-  padding: 10px;
-  margin: 8px;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  background-color: #6237a0;
-}
->>>>>>> main
