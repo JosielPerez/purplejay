@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "@/styles/achievement.module.css";
-import NavBar from "@/components/navbar/NavBar";
 
 
 // ======================================== //
@@ -90,8 +89,6 @@ export const Row = ({src1, name1, desc1, isDone1, src2, name2, desc2, isDone2}:O
 // ===== MAIN ACHIEVEMENT FUNCTION ====== //
 export default function achievement() {
     return (
-        <>
-        <NavBar/>
         <main className={styles.main}>
             {/* Achievement Title */}
             <div className={styles.achievement_title}>
@@ -178,7 +175,6 @@ export default function achievement() {
 
 
         </main>
-        </>
     );
 }
 
