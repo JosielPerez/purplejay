@@ -33,3 +33,8 @@
     color: white;
     background-color:  #6237a0;
 }
+.stock_sell:disabled
+{
+    color: black;
+    background-color: #C3C3C3;
+}

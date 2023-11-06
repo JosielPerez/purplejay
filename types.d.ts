@@ -9,7 +9,7 @@ type StockItem = {
         change:	number,
         change_percent:	string,
         shares_owned: number
-    }
+    },
 }
 type StockItemList = {
     stocks: {

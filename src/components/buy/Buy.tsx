@@ -4,9 +4,11 @@ import './style.css'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Buy({closeModal, price, buyPower, shareNumber, setShareNumber}:any) {
+function Buy({closeModal, stock, buyPower, setBuyPower}:any) {
     
-  const [confirmPage, setConfirmPage] = useState(false)  
+  const [confirmPage, setConfirmPage] = useState(false)
+  const [amount,setAmount] = useState<number | null>()
+  const [shareNumber,setShareNumber] = useState(0);  
   
   function inputCheck (e:string | number): number {
         if (e != "") {
@@ -22,14 +24,39 @@ function Buy({closeModal, price, buyPower, shareNumber, setShareNumber}:any) {
   function handleCancel()
   {
     setShareNumber(0);
+    setAmount(null)
     closeModal(false);
   }
   function handleBack()
   {
-    setShareNumber(0);
+    if (amount != null)
+    {
+      setShareNumber(amount/stock.price);
+      setAmount(amount)
+    }
     setConfirmPage(false);
   }
 
+  function handleAmount(e:any)
+  {
+    e = inputCheck(e)
+    setShareNumber(e/stock.price)
+    setAmount(e)
+  }
+
+  function handleConfirm()
+  {
+    stock.shares_owned += shareNumber
+    if(amount != null)
+    {
+      setBuyPower(buyPower-amount)
+    }
+    setShareNumber(0);
+    setAmount(null)
+    setConfirmPage(false)
+    closeModal(false);
+    console.log(buyPower);
+  }
 return (
         <div className='modal'>
           {(!confirmPage) ?
@@ -38,8 +65,8 @@ return (
                 <header className='modal_header'>Buy Order</header>
                 <form>
                   <label htmlFor='amount' className='modal_label'>Amount: </label>
-                  <input type='number' id='amount' name='amount' placeholder='$0' 
-                      className='modal_input' min="0" max={buyPower} onChange={e =>setShareNumber(inputCheck(e.target.value)/price)}/>
+                  <input type='number' id='amount' name='amount' value={amount} placeholder='$0' 
+                      className='modal_input' min='0' max={buyPower} onChange={e =>handleAmount(e.target.value)}/>
                   <label htmlFor='shares'className='modal_label'>Shares:</label>
                   <input type='number' id='shares' name='shares' placeholder='0'
                       className='modal_input' value={shareNumber} readOnly
@@ -64,10 +91,10 @@ return (
                   />
                   <label htmlFor='at' className='modal_label'>At: </label>
                   <input type='text' id='at' name='at' 
-                    className='modal_input' value = {'$'+ (shareNumber * price)}/>
+                    className='modal_input' value = {'$'+ (amount)} readOnly/>
                 </form>
                 <footer>
-                  <button id='confirm_button' type='submit'>Confirm</button>
+                  <button id='confirm_button' type='submit' onClick={()=>{handleConfirm()}}>Confirm</button>
                 </footer>
               </>)
             }
