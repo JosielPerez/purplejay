@@ -1,4 +1,4 @@
-import DashHeader from '@/components/dashheader/DashHeader';
+import Header from '@/components/header/Header';
 import styles from './styles.module.css'
 import NavBar from '@/components/navbar/NavBar';
 import React from 'react'
@@ -10,8 +10,8 @@ function DashboardLayout({
   }) {
     return (
         <>
-        <DashHeader/>
-        <NavBar navId='dashboard'/>
+        <Header/>
+        <NavBar navId = 'portfolio'/>
         <main className={styles.main}>
             {children}
         </main>

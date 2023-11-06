@@ -6,6 +6,7 @@
     background-color: #f8f8ff;
     border-bottom: 1px solid #C3C3C3;
     height: 50px;
+    cursor: pointer;
   }
   
   #trend-up {
