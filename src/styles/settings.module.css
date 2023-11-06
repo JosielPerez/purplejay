@@ -1,0 +1,211 @@
+.main {
+    height: 100vh;
+    margin-left: 300px; /*might need to change later*/
+    background-color: rgb(200,200,200);
+}
+
+
+
+/*=====================================*/
+/* Settings Title */
+.settings_title {
+    margin: 0px 0px 0px 40px;
+    padding-top: 30px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.title_container {
+    width: 175px;
+    margin-right: 20px;
+}
+
+.title_name {
+    color: #000000;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    width: 175px;
+}
+
+.right_rectangle {
+    height: 40px;
+    width: 100%;
+    background-color: #6237a0;
+    margin-left: 80px;
+}
+
+
+
+
+/*=====================================*/
+/* UserProfile Content */
+.profile_name {
+    margin: 30px 0px 0px 40px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #ffffff;
+    text-shadow: 3px 3px #000000, -3px -3px #000000, 
+    -3px 3px #000000, 3px -3px #000000,
+    0px 3px #000000, 0px -3px #000000,
+    -3px 0px #000000, 3px 0px #000000;
+}
+
+.profile_box {
+    display: flex;
+    height: 60vh;
+    margin: -30px 30px 0px 30px;
+    border-radius: 20px;
+    background-color: #7aa2b6c5;
+}
+
+
+.profile_left_content {
+    height: 50vh;
+    width: 20vw;
+    margin: 40px 0px 0px 20px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.584);
+}
+
+.profile_left_name {
+    height: 10vh;
+    margin: 18px 10px -10px 10px;
+    padding-top: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000000;
+    text-shadow: 2px 2px #ffffff, -2px -2px #ffffff, 
+    -2px 2px #ffffff, 2px -2px #ffffff,
+    0px 2px #ffffff, 0px -2px #ffffff,
+    -2px 0px #ffffff, 2px 0px #ffffff;
+    border-bottom: 2px solid #000000;
+}
+
+.profile_right_content {
+    height: 50vh;
+    width: 48vw;
+    margin: 40px 0px 0px 38px;
+    border-radius: 20px;
+    /*background-color: #000000;*/
+}
+
+.profile_right_box {
+    display: flex;
+    height: 8vh;
+    width: 48vw;
+    margin-top: 24px;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+.profile_right_box p {
+    align-self: center;
+    margin-left: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+}
+
+.profile_income_box {
+    display: flex;
+    height: 8vh;
+    width: 18vw;
+    margin-top: 24px;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+.profile_income_box p {
+    align-self: center;
+    margin-left: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #000000;
+}
+
+
+
+.profile_income_editing {
+    position:absolute;
+    align-self: center;
+    margin-left: 14vw;
+}
+.profile_editing {
+    position: absolute;
+    align-self: center;
+    margin-left: 44vw;
+}
+
+.profile_income_editing:hover {
+    filter:invert(70%);
+}
+.profile_editing:hover {
+    filter:invert(70%);
+}
+.profile_income_editing:active {
+    filter:brightness(20%);
+}
+.profile_editing:active {
+    filter:brightness(20%);
+}
+
+
+
+/*=====================================*/
+/* ResetButton Content */
+.reset_name {
+    margin: 20px 0px 0px 40px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: #cc2d2d;
+    text-shadow: 3px 3px #000000, -3px -3px #000000, 
+    -3px 3px #000000, 3px -3px #000000,
+    0px 3px #000000, 0px -3px #000000,
+    -3px 0px #000000, 3px 0px #000000;
+}
+
+.reset_box {
+    display: flex;
+    height: 18vh;
+    margin: -26px 30px 0px 30px;
+    border-radius: 20px;
+    background-color: #446779c5;
+}
+
+.reset_description {
+    padding: 35px 10px 0px 20px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    
+}
+
+.reset_image_box {
+    width: 200px;
+    height: 100px;
+    margin-right: 20px;
+    align-self: center;
+    border-radius: 20px;
+    border: 4px solid rgb(163, 0, 0);
+    background-color:#a7b4b8;
+}
+.reset_image_box:hover {
+    filter: brightness(80%);
+    border:4px solid rgb(255, 0, 0);
+    background-color: #eea487;
+}
+.reset_image_box:active {
+    filter: brightness(80%);
+    border:4px solid rgb(135, 0, 0);
+    background-color: #ff0000;
+}
+
+.reset_image {
+    margin-top: 4px;
+    margin-left: 4px;
+}
