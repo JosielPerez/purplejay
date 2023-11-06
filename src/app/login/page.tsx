@@ -19,7 +19,7 @@ export default function LogIn() {
         console.log("User logged in: ", user);
 
         // Redirect to another page after successful login
-        router.push("/dashboard"); // or your desired route after login
+        router.push("/logoutpage"); // or your desired route after login
       })
       .catch((error) => {
         const errorCode = error.code;

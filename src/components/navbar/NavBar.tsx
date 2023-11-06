@@ -28,11 +28,11 @@ function NavBar() {
             <Link href="/settings" className={currentNav === 4 ? 'active' : ''}>Settings</Link>
           </li>
           <li>
-            <LogOut />
+            <Link href="/">Log out</Link>
           </li>
         </ul>
       </nav>
   )
 }
 
-export default NavBar;
+export default NavBar
