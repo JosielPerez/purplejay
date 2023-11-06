@@ -1,8 +1,6 @@
-"use client";
 import React from "react";
 import "./style.css";
 import Link from "next/link";
-import LogOut from "../logout";
 
 function NavBar() {
   const [currentNav, setcurrentNav] = useState<number>(1);
