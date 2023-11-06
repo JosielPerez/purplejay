@@ -91,7 +91,7 @@ export const Row = ({src1, name1, desc1, isDone1, src2, name2, desc2, isDone2}:O
 export default function achievement() {
     return (
         <>
-        <NavBar/>
+        <NavBar navId = 'achievement'/>
         <main className={styles.main}>
             {/* Achievement Title */}
             <div className={styles.achievement_title}>
