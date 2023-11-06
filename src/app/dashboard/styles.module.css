@@ -58,4 +58,19 @@
   animation: spin 4s linear infinite;
   height: 100px; /* Or whatever size you want */
   width: 100px; /* Or whatever size you want */
+  
+  
+  .stock_sell:disabled
+{
+    color: black;
+    background-color: #C3C3C3;
+    cursor: not-allowed;
 }
+.buy_power{
+    position: absolute;
+    color: #6237a0;
+    left: 38%;
+    top:59%;
+    font-size: 22px;
+}
+

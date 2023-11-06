@@ -162,6 +162,7 @@ function Dashboard() {
         price={tickerStock.price}
       />
       <TimeRange selectTimeOption={selectTimeOption} />
+      <label className={styles.buy_power}>Buy Power:   ${buyPower}</label>
       <button
         className={styles.stock_buy}
         onClick={() => {
