@@ -1,41 +1,61 @@
 .main {
-    display: grid;
-    justify-content: space-around;
+  display: grid;
+  justify-content: space-around;
 }
-.stock_buy{
-    
-    width: 90px;
-    height:40px; 
-    position: absolute;
-    left:65%;
-    top: 58%;
-    padding: 10px;
-    margin: 8px;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    background-color:  #6237a0;
+.stock_buy {
+  width: 90px;
+  height: 40px;
+  position: absolute;
+  left: 65%;
+  top: 58%;
+  padding: 10px;
+  margin: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: #6237a0;
 }
 
-.stock_sell{
-    
-    width: 90px;
-    height:40px; 
-    position: absolute;
-    left:75%;
-    top: 58%;
-    padding: 10px;
-    margin: 8px;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    background-color:  #6237a0;
+.stock_sell {
+  width: 90px;
+  height: 40px;
+  position: absolute;
+  left: 75%;
+  top: 58%;
+  padding: 10px;
+  margin: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: #6237a0;
 }
-.stock_sell:disabled
-{
-    color: black;
-    background-color: #C3C3C3;
-    cursor: not-allowed;
+.stock_sell:disabled {
+  color: black;
+  background-color: #c3c3c3;
+  cursor: not-allowed;
+}
+
+.loading {
+  height: 100vh;
+  background: #242626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo_spinner {
+  animation: spin 4s linear infinite;
+  height: 100px; /* Or whatever size you want */
+  width: 100px; /* Or whatever size you want */
 }
