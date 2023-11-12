@@ -161,7 +161,7 @@ function Editing(inputType:string){
 export default function settings() {
     return(
         <>
-        <NavBar/>
+        <NavBar navId = 'settings'/>
         <main className={styles.main}>
             {/* Settings Title */}
             <div className={styles.settings_title}>

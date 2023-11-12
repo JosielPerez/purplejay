@@ -1,8 +1,37 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "@/styles/signup.module.css";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/library/firebase";
 
 export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  const router = useRouter();
+
+  const signup = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log("User created: ", user);
+        alert("Account Created!");
+
+        // Redirect to another page after successful signup
+        router.push("/"); // or your desired route
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error code: ", errorCode);
+        console.log("Error message: ", errorMessage);
+
+        // Handle errors here, such as displaying a notification or updating UI
+      });
+  };
   return (
     <main>
       <section className={styles.main}>
@@ -14,7 +43,7 @@ export default function SignUp() {
           <div className={styles.form_container}>
             <div className={styles.form_content}>
               <h1 className={styles.title_form}>Create an account</h1>
-              <form action="#">
+              <div>
                 <div className={styles.input_group}>
                   <label className={styles.input_name} htmlFor="email">
                     Your email
@@ -25,6 +54,7 @@ export default function SignUp() {
                     id="email"
                     placeholder="name@email.com"
                     color="#D9D9D9"
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -38,6 +68,7 @@ export default function SignUp() {
                     id="password"
                     placeholder="••••••••"
                     color="#D9D9D9"
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -53,6 +84,7 @@ export default function SignUp() {
                     name="confirm-password"
                     id="confirm-password"
                     placeholder="••••••••"
+                    onChange={(e) => setPasswordAgain(e.target.value)}
                     required
                   />
                 </div>
@@ -66,7 +98,17 @@ export default function SignUp() {
                     </a>
                   </label>
                 </div>
-                <button className={styles.button} type="submit">
+                <button
+                  disabled={
+                    !email ||
+                    !password ||
+                    !passwordAgain ||
+                    password !== passwordAgain
+                  }
+                  onClick={() => signup()}
+                  className={styles.button}
+                  type="submit"
+                >
                   Create an account
                 </button>
                 <p className={styles.account_name}>
@@ -75,7 +117,7 @@ export default function SignUp() {
                     Login here
                   </Link>
                 </p>
-              </form>
+              </div>
             </div>
           </div>
         </div>
