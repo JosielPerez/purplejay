@@ -5,11 +5,12 @@ import Image from 'next/image';
 import styles from '@/styles/settings.module.css';
 import NavBar from '@/components/navbar/NavBar';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Input, InputLabel, FilledInput, Stack, FormControl, FormHelperText } from '@mui/material';
-
+import { auth } from '@/library/firebase';
+import { getAuth, updateEmail, updatePassword, verifyBeforeUpdateEmail } from 'firebase/auth';
 
 
 let testVar:string = "someusername";
-let input:string = "";
+let testNum:number = 0;
 
 
 // ======================================== //
@@ -29,6 +30,15 @@ function defineInputType(inputType:string){
     }
 }
 
+function getUserEmail(){
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if(user != null) {
+        return user.email;
+    }
+    return "null/no email found";
+}
+
 function isIncomeEdit(inputType:string){
     if(inputType=="Income"){
         return styles.profile_income_editing;
@@ -38,92 +48,144 @@ function isIncomeEdit(inputType:string){
     }
 }
 
-function setUsername(value:any){
-    input = value;
-}
-
-// have 2 text field for password section
-function isPassword(inputType:string){
-    if(inputType=="Password"){
-        return(
-            <React.Fragment>
-            <TextField
-            autoFocus
-            label="New password"
-            helperText="Please enter new input here"
-            variant="filled"
-            margin="dense"
-            type={defineInputType(inputType)}
-            fullWidth
-            />
-            <TextField
-            autoFocus
-            label="Confirm password"
-            helperText="Please confirm the password"
-            variant="filled"
-            margin="dense"
-            type={defineInputType(inputType)}
-            fullWidth
-            />
-            </React.Fragment>
-        );
-    }
-    else{
-        return(
-            /*
-            <TextField
-            autoFocus
-            label={inputType}
-            helperText="Please enter new input here"
-            variant="filled"
-            margin="dense"
-            type={defineInputType(inputType)}
-            fullWidth
-            />*/
-            <FormControl className={styles.dialog_box} variant="filled">
-                <InputLabel>{inputType}</InputLabel>
-                <FilledInput 
-                autoFocus
-                margin="dense" 
-                type={defineInputType(inputType)} 
-                fullWidth
-                onChange={e => setUsername(e.target.value)}    
-                />
-                <FormHelperText>Please enter new input here</FormHelperText>
-            </FormControl>
-        );
-    }
-}
-
-
-
 
 // ======================================== //
 // ========== Function Component ========== //
 function Editing(inputType:string){
-    // open = current state = false
-    // setOpen = function used to update the state
     const [open, setOpen] = React.useState(false);
+    const [income, setIncome] = React.useState(0);
+    const [str, setString] = React.useState("");
+    const [newPassConfirm, setPassConfirm] = React.useState("");
+    const auth = getAuth();
+
+    const setValue = (value: any, inputType:string) => {
+        if(inputType == "Income"){
+            console.log("setting income...");
+            setIncome(value);
+        } 
+        else{
+            console.log("setting string...");
+            setString(value);
+        }
+    }
+
+    const isPassword = (inputType:string) => {
+        if(inputType=="Password"){
+            return(
+                <React.Fragment>
+                <TextField
+                autoFocus
+                label="New password"
+                helperText="Please enter new input here"
+                variant="filled"
+                margin="dense"
+                type={defineInputType(inputType)}
+                fullWidth
+                onChange={e => setString(e.target.value)}
+                />
+                <TextField
+                autoFocus
+                label="Confirm password"
+                helperText="Please confirm the password"
+                variant="filled"
+                margin="dense"
+                type={defineInputType(inputType)}
+                fullWidth
+                onChange={e=> setPassConfirm(e.target.value)}
+                />
+                </React.Fragment>
+            );
+        }
+        else{
+            return(
+                <FormControl className={styles.dialog_box} variant="filled">
+                    <InputLabel>{inputType}</InputLabel>
+                    <FilledInput 
+                    autoFocus
+                    margin="dense" 
+                    type={defineInputType(inputType)} 
+                    fullWidth
+                    onChange={e => setValue(e.target.value, inputType)}    
+                    />
+                    <FormHelperText>Please enter new input here</FormHelperText>
+                </FormControl>
+            );
+        }
+    } // end isPassword()
+
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClickClose = () => {
-        input = "";
         setOpen(false);
     };
 
     const handleClickConfirm = () => {
-        if(input == ""){
-            setOpen(false);
+        if(inputType == "Email") {
+            if(str != ""){
+                if(auth.currentUser != null){
+                    verifyBeforeUpdateEmail(auth.currentUser, str)
+                    .then(()=>{
+                        // updateEmail success!
+                        console.log("input: ", str);
+                        console.log("User email updated: ", auth.currentUser);
+                    })
+                    .catch((error)=>{
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log("Error code: ", errorCode);
+                        console.log("Error message: ", errorMessage);
+                    })
+                }
+            }
+        }
+        else if(inputType == "Username"){
+            if(str != "" ){
+                // ============================
+                // NEED TO MODIFY AFTER DATABASE
+                testVar = str;
+            }
+        } 
+        else if(inputType == "Password"){
+            if(str != ""){
+                if(str == newPassConfirm){
+                    if(auth.currentUser != null){
+                        updatePassword(auth.currentUser, str)
+                        .then(()=>{
+                            // updatePassword success!
+                            console.log("input: ", str);
+                            console.log("User password updated: ", auth.currentUser);
+                        })
+                        .catch((error)=>{
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            console.log("Error code: ", errorCode);
+                            console.log("Error message: ", errorMessage);
+                        })
+
+                        // SHOULD NOTIFY USER THAT IT'S SUCCESS!!!
+                    }
+                }
+                else {
+                    // BETTER TO HAVE POP UP WINDOW
+                    console.log("BAD INPUT!!! NOT SAME!!!");
+                }
+            }
         }
         else{
-            testVar = input;
-            input = "";
-            setOpen(false);
+            if(income > 0){
+                // ============================
+                // NEED TO MODIFY AFTER DATABASE
+                testNum = Math.round(income * 100) / 100;
+            }
         }
-    }
+
+        setOpen(false);
+    } // end handleClickConfirm()
 
 
     return(
@@ -151,7 +213,7 @@ function Editing(inputType:string){
         </Dialog>
     </div>
     );
-}
+} // end Editing()
 
 
 
@@ -182,7 +244,7 @@ export default function settings() {
                 </div>
                 <div className={styles.profile_right_content}>
                     <div className={styles.profile_right_box}>
-                        <p>name@gmail.com</p>
+                        <p>{getUserEmail()}</p>
                         {Editing("Email")}
                     </div>
                     <div className={styles.profile_right_box}>
@@ -190,11 +252,11 @@ export default function settings() {
                         {Editing("Username")}
                     </div>
                     <div className={styles.profile_right_box}>
-                        <p>password here</p>
+                        <p>************</p>
                         {Editing("Password")}
                     </div>
                     <div className={styles.profile_income_box}>
-                        <p>$8888</p>
+                        <p>${testNum}</p>
                         {Editing("Income")}
                     </div>
                 </div>
