@@ -1,7 +1,7 @@
-import DashHeader from '@/components/dashheader/DashHeader';
 import styles from './styles.module.css'
 import NavBar from '@/components/navbar/NavBar';
-import React from 'react'
+import React, { useState } from "react";
+import Header from '@/components/header/Header';
 
 function DashboardLayout({
     children,
@@ -10,7 +10,7 @@ function DashboardLayout({
   }) {
     return (
         <>
-        <DashHeader/>
+        <Header/>
         <NavBar navId='dashboard'/>
         <main className={styles.main}>
             {children}

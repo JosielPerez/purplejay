@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
 import './style.css';
 

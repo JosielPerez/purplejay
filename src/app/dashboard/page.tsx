@@ -8,15 +8,21 @@ import styles from "./styles.module.css";
 import Sell from "@/components/sell/Sell";
 import TimeRange from "@/components/timerange/TimeRange";
 import StockStats from "@/components/stockstats/StockStats";
+import AddStock from "@/components/addstock/AddStock";
 
 function Dashboard() {
-  const API_KEY = "demo"; //'OTGL48VF2QBKDZSK''NF6LXRYWSZLD6W5D'
+  const API_KEY =  'demo' //'NF6LXRYWSZLD6W5D' //'OTGL48VF2QBKDZSK'
+  let stockOptions = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "META", "JPM", "JNJ", "V", "PYPL", "BABA", "BAC", "INTC", "NFLX", "VZ", "CSCO", "XOM", "WMT", "HD", "DIS", "PFE", "CVX", "T", "MRK", "NVDA", "BA", "GS", "ORCL", "CRM", "ADBE", "CMCSA", "KO", "IBM", "UNH", "MCD", "HON", "PEP", "CAT", "TMO", "PM", "VRTX", "MA", "QCOM", "WFC", "AMGN", "ACN", "NKE", "SLB", "GILD", "TXN", "LLY", "MDLZ", "UTX", "ABT", "COST", "HDB", "MDT", "TSM", "DWDP", "AZN", "SAP"]
   let stockSymbols = ["IBM"];
-  const [stocks, setStocks] = useState([]);
+  const [stocks, setStocks] = useState(JSON.parse(localStorage.getItem('watchlist')));
   const [tickerStock, setTickerStock] = useState([]);
+  const [newStock,setNewStock] = useState('');
+  const [selectedStock,setSelectedStock] = useState<string>('')
 
   // Buy/Sell  modal hook
-  const [buyPower, setBuyPower] = useState(1000);
+  let cash = localStorage.getItem('buyPower')
+  if(cash == null) cash = 1000;
+  const [buyPower, setBuyPower] = useState(cash);
   const [openBuyModal, setBuyModal] = useState(false);
   const [openSellModal, setSellModal] = useState(false);
 
@@ -41,49 +47,82 @@ function Dashboard() {
 
   const [timeOption, setTimeOption] = useState([startTime, endTime]);
 
-  useEffect(() => {
-    const fetchStocks = async (symbol: string) => {
-      try {
-        const response = await fetch(
-          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
-        );
-        const data = await response.json();
-        console.log(data);
-        const stockItem = {
-          symbol: data["Global Quote"]["01. symbol"],
-          open: data["Global Quote"]["02. open"],
-          high: data["Global Quote"]["03. high"],
-          low: data["Global Quote"]["04. low"],
-          price: data["Global Quote"]["05. price"],
-          volume: data["Global Quote"]["06. volume"],
-          change: data["Global Quote"]["09. change"],
-          change_percent: data["Global Quote"]["10. change_percent"],
-          shares_owned: 0,
-        };
-        return stockItem;
-      } catch (err: any) {
-        console.log(err.stack);
-      }
-    };
-    let stockList: any = [];
-    stockSymbols.forEach((symbol) => stockList.push(fetchStocks(symbol)));
+  const setAndSaveStocks = (newStocks)=>{
+    setStocks(newStocks);
+    localStorage.setItem('watchlist',JSON.stringify(newStocks))
+  }
 
+  useEffect(() => {
+    let stockList: any = [];
+    // stockSymbols.forEach((symbol) => stockList.push(updateStock(symbol)));
+    
+    for(let i=0;i<stockSymbols.length;i++)
+    {
+      stockList.push(updateStock(stockSymbols[i],i))
+    }
+    
     Promise.all(stockList)
       .then((results: any) => {
-        console.log(results);
-        setStocks(results);
+        setAndSaveStocks(results)
         setTickerStock(results[0]);
+        setSelectedStock(results[0].symbol);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  const fetchStock = async (symbol: string) => {
+    try {
+      const response = await fetch(
+        `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
+      );
+      const data = await response.json();
+      const stockItem = {
+        symbol: data["Global Quote"]["01. symbol"],
+        open: data["Global Quote"]["02. open"],
+        high: data["Global Quote"]["03. high"],
+        low: data["Global Quote"]["04. low"],
+        price: data["Global Quote"]["05. price"],
+        volume: data["Global Quote"]["06. volume"],
+        change: data["Global Quote"]["09. change"],
+        change_percent: data["Global Quote"]["10. change percent"],
+        shares_owned: 0,
+      };
+      return stockItem;
+    } catch (err: any) {
+      console.log(err.stack);
+    }
+  };
+
+  const updateStock = async (symbol: string, index:number) => {
+    try {
+      const response = await fetch(
+        `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`
+      );
+      const data = await response.json();
+      const stockItem = {
+        symbol: data["Global Quote"]["01. symbol"],
+        open: data["Global Quote"]["02. open"],
+        high: data["Global Quote"]["03. high"],
+        low: data["Global Quote"]["04. low"],
+        price: data["Global Quote"]["05. price"],
+        volume: data["Global Quote"]["06. volume"],
+        change: data["Global Quote"]["09. change"],
+        change_percent: data["Global Quote"]["10. change percent"],
+        shares_owned: (stocks[index]).shares_owned ,
+      };
+      return stockItem;
+    } catch (err: any) {
+      console.log(err.stack);
+    }
+  };
+
   useEffect(() => {
-    fetchStock();
+    fetchTickerStock();
   }, [tickerStock]);
 
-  const fetchStock = async () => {
+  const fetchTickerStock = async () => {
     try {
       const API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbols[0]}&interval=5min&outputsize=full&apikey=${API_KEY}`;
 
@@ -151,9 +190,50 @@ function Dashboard() {
       setTimeOption([startTime, endTime]);
     }
   }
+
+    const addStock = (symbol:string) => {
+      const myStock = fetchStock(symbol)
+      Promise.resolve(myStock)
+      .then((result: StockItem) => {
+        setAndSaveStocks([...stocks,result]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+
+    const handleSubmit = (e:any) =>{
+      e.preventDefault();
+      if(!newStock)return;
+      else if(!stockOptions.includes(newStock))
+      {
+        setNewStock('Enter valid stock name or ticker')
+        setTimeout(function(){
+          setNewStock('')
+        },1400)
+        return;
+      }
+      // else if((stocks.symbol).includes(newStock))
+      // {
+      //   setNewStock(newStock + ' is already in your watchlist')
+      //   setTimeout(function(){
+      //     setNewStock('')
+      //   },1400)
+      //   return;
+      // }
+      addStock(newStock);
+      setNewStock('')
+    }
+
+    function handleSelect(stock:any){
+      setSelectedStock(stock.symbol);
+      setTickerStock(stock);
+    }
+
   return (
     <>
-      <StockList stocks={stocks} setTickerStock={setTickerStock} />
+      <AddStock newStock = {newStock} setNewStock={setNewStock} handleSubmit={handleSubmit}/>
+      <StockList stocks={stocks} selectedStock={selectedStock} handleSelect={handleSelect} />
       <StockGraph
         stockChartXValues={stockChartXValues}
         stockChartYValues={stockChartYValues}

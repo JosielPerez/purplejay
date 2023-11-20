@@ -8,6 +8,16 @@
     height: 50px;
     cursor: pointer;
   }
+.active_stock{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0 0.5rem 0.25rem;
+  background-color: #f8f8ff;
+  border-bottom: 1px solid #C3C3C3;
+  height: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #000;
+}
   
   #trend-up {
     width: 46px;

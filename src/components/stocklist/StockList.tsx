@@ -4,16 +4,17 @@ import Stock from '../stock/Stock'
 import './style.css'
 
 
-function StockList({stocks, setTickerStock}:any) {
+function StockList({stocks, selectedStock, handleSelect}:any) {
   return (
     <ul className= "stocklist">
-        {stocks.map((stock) =>(
+        {stocks ? stocks.map((stock) =>(
             <Stock
                 key={stock.symbol}
                 stock = {stock}
-                setTickerStock = {setTickerStock}
+                selectedStock={selectedStock}
+                handleSelect = {handleSelect}
             />
-        ))}
+        )) : 'No Stocks Added'}
     </ul>
   )
 }

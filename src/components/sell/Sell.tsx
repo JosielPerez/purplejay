@@ -7,10 +7,20 @@ function Sell({closeModal, stock, buyPower, setBuyPower}:any) {
     
   const [confirmPage, setConfirmPage] = useState(false)
   const [amount,setAmount] = useState<number|null>(0)
-  const [shareNumber,setShareNumber] = useState<number|null>();  
+  const [shareNumber,setShareNumber] = useState<number|null>();
+  let transactions:any = JSON.parse(localStorage.getItem('transactions'))
+  if (transactions == null) transactions = []
+  let watchlist:any = JSON.parse(localStorage.getItem('watchlist'))
   
-  
-  
+  function updateSharesOwned( list:any, newSharesOwned:number)
+  {
+    for(let i =0; i< list.length;i++)
+    {
+      if ( list[i].symbol == stock.symbol) 
+        list[i].shares_owned = newSharesOwned
+    }
+  }
+
   function inputCheck (e:string | number): number {
     if (e != "") {
       if (Number(e) < 0) {
@@ -46,13 +56,38 @@ function Sell({closeModal, stock, buyPower, setBuyPower}:any) {
     setShareNumber(e)
   }
 
+  const setAndSaveTransactions = (transactions:any, buyPower:any, watchlist:any, newSharesOwned:any)=>{
+    localStorage.setItem('transactions',JSON.stringify(transactions))
+    updateSharesOwned(watchlist,newSharesOwned)
+    localStorage.setItem('watchlist',JSON.stringify(watchlist))
+    localStorage.setItem('buyPower',buyPower)
+  }
+
   function handleConfirm()
   {
+    
     if(shareNumber != null)
     {
-      stock.shares_owned -= shareNumber
+      let current = new Date();
+      let cDate = current.getHours() + ":" + current.getMinutes() + " " +
+                  current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+                  
+      let newTransaction = {
+        symbol: stock.symbol,
+        type: 'Sell',
+        shares: shareNumber,
+        price: Number(stock.price),
+        amount: amount,
+        total_shares: Number(stock.shares_owned) - shareNumber,
+        buy_power: Number(buyPower) + amount,
+        time: cDate
+      }
+      transactions.push(newTransaction)
+      stock.shares_owned -= shareNumber;
+      setAndSaveTransactions(transactions,(Number(buyPower)+amount),watchlist,(stock.shares_owned));
+      setBuyPower(Number(buyPower)+amount)
     }
-    setBuyPower(buyPower+amount)
+
     setShareNumber(null);
     setAmount(null)
     setConfirmPage(false)
