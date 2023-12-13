@@ -6,7 +6,7 @@ function Transaction({transaction}: any) {
   
   return (
     <tr className='transaction_row'>
-        <td>{transaction.type}</td> 
+        <td style={{color:(transaction.type == 'Buy' ? 'green':'red') }}>{transaction.type}</td>
         <td>{transaction.symbol}</td>
         <td>{(transaction.shares).toFixed(2)}</td>
         <td>{(transaction.amount).toFixed(2)}</td>

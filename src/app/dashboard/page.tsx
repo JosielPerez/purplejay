@@ -1,5 +1,5 @@
 //@ts-nocheck
-"use client";
+"use client"
 import Buy from "@/components/buy/Buy";
 import StockGraph from "@/components/stockgraph/StockGraph";
 import StockList from "@/components/stocklist/StockList";
@@ -10,11 +10,27 @@ import TimeRange from "@/components/timerange/TimeRange";
 import StockStats from "@/components/stockstats/StockStats";
 import AddStock from "@/components/addstock/AddStock";
 
+
+
 function Dashboard() {
-  const API_KEY =  'demo' //'NF6LXRYWSZLD6W5D' //'OTGL48VF2QBKDZSK'
+
+  const API_KEY =  'WWN8JLPOQGO3WWTR' //'NF6LXRYWSZLD6W5D' //'OTGL48VF2QBKDZSK'
   let stockOptions = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "META", "JPM", "JNJ", "V", "PYPL", "BABA", "BAC", "INTC", "NFLX", "VZ", "CSCO", "XOM", "WMT", "HD", "DIS", "PFE", "CVX", "T", "MRK", "NVDA", "BA", "GS", "ORCL", "CRM", "ADBE", "CMCSA", "KO", "IBM", "UNH", "MCD", "HON", "PEP", "CAT", "TMO", "PM", "VRTX", "MA", "QCOM", "WFC", "AMGN", "ACN", "NKE", "SLB", "GILD", "TXN", "LLY", "MDLZ", "UTX", "ABT", "COST", "HDB", "MDT", "TSM", "DWDP", "AZN", "SAP"]
   let stockSymbols = ["IBM"];
+  
+  // const fetchWatchlist = async () =>{
+  //   const query = await fetch("http://localhost:3000/api/watchlist", {
+  //     method: "GET",
+  //   });
+  //   const response = await query.json()
+  //   const watchlist = response["watchlist"]
+  //   console.log('respose from API', watchlist)
+  //   localStorage.setItem('watchlist',JSON.stringify(watchlist))
+  // }
+  // fetchWatchlist()
+  
   const [stocks, setStocks] = useState(JSON.parse(localStorage.getItem('watchlist')));
+
   const [tickerStock, setTickerStock] = useState([]);
   const [newStock,setNewStock] = useState('');
   const [selectedStock,setSelectedStock] = useState<string>('')
@@ -35,14 +51,22 @@ function Dashboard() {
     "-" +
     (current.getMonth() + 1) +
     "-" +
-    current.getDate();
+    current.getDate() + 
+    " " +
+    current.getHours() +
+    ":" + current.getMinutes()
+
   let endTime = cDate;
   cDate =
     current.getFullYear() +
     "-" +
     (current.getMonth() + 1) +
     "-" +
-    (current.getDate() - 1);
+    (current.getDate() - 1) +
+    " " +
+    current.getHours() +
+    ":" + current.getMinutes()
+
   let startTime = cDate;
 
   const [timeOption, setTimeOption] = useState([startTime, endTime]);
@@ -53,7 +77,9 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    let stockList: any = [];
+    if (stocks)
+    {
+      let stockList: any = [];
     // stockSymbols.forEach((symbol) => stockList.push(updateStock(symbol)));
     
     for(let i=0;i<stockSymbols.length;i++)
@@ -70,6 +96,7 @@ function Dashboard() {
       .catch((err) => {
         console.log(err);
       });
+    }
   }, []);
 
   const fetchStock = async (symbol: string) => {
@@ -124,7 +151,7 @@ function Dashboard() {
 
   const fetchTickerStock = async () => {
     try {
-      const API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbols[0]}&interval=5min&outputsize=full&apikey=${API_KEY}`;
+      const API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${tickerStock.symbol}&interval=5min&outputsize=full&apikey=${API_KEY}`;
 
       const stockChartXValuesFunction = [];
       const stockChartYValuesFunction = [];
@@ -153,12 +180,33 @@ function Dashboard() {
 
   function selectTimeOption(option) {
     if (option === "1D") {
-      cDate =
+      if(current.getDate() == 1)
+      {
+        let temp_day = new Date( current.getFullYear(),current.getMonth()+1,0).getDate() 
+        cDate =
+        current.getFullYear() +
+        "-" +
+        (current.getMonth()) +
+        "-" +
+        (temp_day) +
+        " " +
+        current.getHours() +
+        ":" + current.getMinutes()
+      }
+      else
+      {
+        cDate =
         current.getFullYear() +
         "-" +
         (current.getMonth() + 1) +
         "-" +
-        (current.getDate() - 1);
+        (current.getDate() - 1) +
+        " " +
+        current.getHours() +
+        ":" + current.getMinutes()
+      }
+
+
       startTime = cDate;
       setTimeOption([startTime, endTime]);
     } else if (option === "1W") {
@@ -167,16 +215,25 @@ function Dashboard() {
         "-" +
         (current.getMonth() + 1) +
         "-" +
-        (current.getDate() - 6);
+        (current.getDate() - 6) +
+        " " +
+        current.getHours() +
+        ":" + current.getMinutes()
+
       startTime = cDate;
-      setTimeOption(["2023-10-31", endTime]);
+      setTimeOption([startTime, endTime]);
+      
     } else if (option === "1M") {
       cDate =
         current.getFullYear() +
         "-" +
         current.getMonth() +
         "-" +
-        current.getDate();
+        current.getDate() +
+        " " +
+        current.getHours() +
+        ":" + current.getMinutes()
+
       startTime = cDate;
       setTimeOption([startTime, endTime]);
     } else if (option === "3M") {
@@ -185,7 +242,11 @@ function Dashboard() {
         "-" +
         (current.getMonth() - 2) +
         "-" +
-        current.getDate();
+        current.getDate() +
+        " " +
+        current.getHours() +
+        ":" + current.getMinutes()
+        
       startTime = cDate;
       setTimeOption([startTime, endTime]);
     }
@@ -235,11 +296,11 @@ function Dashboard() {
       <AddStock newStock = {newStock} setNewStock={setNewStock} handleSubmit={handleSubmit}/>
       <StockList stocks={stocks} selectedStock={selectedStock} handleSelect={handleSelect} />
       <StockGraph
-        stockChartXValues={stockChartXValues}
-        stockChartYValues={stockChartYValues}
+        stockChartXValues={stockChartXValues ? stockChartXValues : 0}
+        stockChartYValues={stockChartYValues ? stockChartYValues : 0}
         timeOption={timeOption}
-        title={tickerStock.symbol}
-        price={tickerStock.price}
+        title={tickerStock ? tickerStock.symbol : '---'}
+        price={ tickerStock ? tickerStock.price : 0}
       />
       <TimeRange selectTimeOption={selectTimeOption} />
       <label className={styles.buy_power}>Buy Power:   ${buyPower}</label>
@@ -257,7 +318,7 @@ function Dashboard() {
         onClick={() => {
           setSellModal(true);
         }}
-        disabled={!tickerStock.shares_owned}
+        disabled={tickerStock ? !tickerStock.shares_owned: 1}
       >
         Sell
       </button>
@@ -281,5 +342,21 @@ function Dashboard() {
     </>
   );
 }
+
+// export const fetchWatchlist = async () =>{
+//   try {
+//     const query = await fetch("http://localhost:3000/api/watchlist", {
+//       method: "GET",
+//     });
+//     const response = await query.json();
+//     const watchlist = response["watchlist"];
+
+//     return watchlist;
+//   } catch (error) {
+//     // Handle errors if needed
+//     console.error("Error fetching watchlist:", error);
+//     throw error;
+//   }
+// }
 
 export default Dashboard;

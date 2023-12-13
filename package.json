@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "firebase": "^10.5.2",
+    "mongodb": "^6.3.0",
     "next": "^13.5.4",
     "plotly.js": "^2.27.0",
     "react": "^18",
