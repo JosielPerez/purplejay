@@ -11,7 +11,7 @@ function PortfolioGraph({timeOption, stockChartXValues, stockChartYValues }) {
         data={[
           {
             x: stockChartXValues ,
-            y: stockChartXValues ,
+            y: stockChartYValues ,
             type: 'scatter',
             mode: 'lines',
             marker: { color: '#6237a0' },
