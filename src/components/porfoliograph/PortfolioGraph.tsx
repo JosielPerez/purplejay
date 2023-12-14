@@ -3,15 +3,15 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import './style.css';
 
-function PortfolioGraph({timeOption}) {
+function PortfolioGraph({timeOption, stockChartXValues, stockChartYValues }) {
 
   return (
     <div>
       <Plot className="portfolio_ticker"
         data={[
           {
-            x: [30,40,80],
-            y: [95,92,30],
+            x: stockChartXValues ,
+            y: stockChartXValues ,
             type: 'scatter',
             mode: 'lines',
             marker: { color: '#6237a0' },
