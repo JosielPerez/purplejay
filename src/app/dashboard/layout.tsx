@@ -32,7 +32,6 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div className={styles.loading}>
         <img className={styles.logo_spinner} src="/logo.png" alt="logo" />
       </div>
-    );
  }
     return (
 

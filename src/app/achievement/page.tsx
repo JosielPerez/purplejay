@@ -1,8 +1,10 @@
+'use client';
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "@/styles/achievement.module.css";
 import NavBar from "@/components/navbar/NavBar";
+import { count } from "firebase/firestore";
 
 
 // ======================================== //
@@ -69,6 +71,36 @@ function isDescriptionTrue(desc:string, isDone:boolean) {
 }
 
 
+function getAchievement1() {
+    const achievement1 = localStorage["achievement1"];
+    if(achievement1 == "true") {
+        return true;
+    }
+    return false;
+}
+function getAchievement2() {
+    const achievement2 = localStorage["achievement2"];
+    if(achievement2 == "true") {
+        return true;
+    }
+    return false;
+}
+
+function countAchievements() {
+    var count = 0;
+    var str = "achievement";
+    for(var i = 1; i <= 10; i++) {
+        str += i;
+        if(localStorage.getItem(str) == "true"){
+            count++;
+        }
+        str = "achievement";
+    }
+
+    return count;
+}
+
+
 // ====================================== //
 // == FUNCTION COMPONENT for each row === //
 export const Row = ({src1, name1, desc1, isDone1, src2, name2, desc2, isDone2}:ObjectProps) => <div>
@@ -90,7 +122,7 @@ export const Row = ({src1, name1, desc1, isDone1, src2, name2, desc2, isDone2}:O
 // ===== MAIN ACHIEVEMENT FUNCTION ====== //
 export default function achievement() {
     return (
-        <>
+        <> 
         <NavBar navId = 'achievement'/>
         <main className={styles.main}>
             {/* Achievement Title */}
@@ -103,7 +135,7 @@ export default function achievement() {
 
             {/* Achievement Number */}
             <div className={styles.achievement_number}>
-                <h1>5/10</h1> {/*need to modify somehow*/}
+                <h1>{countAchievements()}/10</h1> {/*need to modify somehow*/}
             </div>
 
             {/* Achievements Content */}
@@ -113,64 +145,64 @@ export default function achievement() {
                 <Row 
                 src1="/achievement1.png" 
                 name1="Let's Get Started" 
-                desc1="You got the first asset"
-                isDone1={true}
-                src2="/achievement1.png"
-                name2="Achievement2"
-                desc2="Fortune 500 company"
-                isDone2={false}
+                desc1="You bought the first asset"
+                isDone1={getAchievement1()} // local parameter
+                src2="/achievement2.png"
+                name2="A Decision's Made"
+                desc2="You sold your first asset"
+                isDone2={getAchievement2()}
                 />
 
                 {/* ================================= */}
                 {/* 2nd row */}
                 <Row 
-                src1="/achievement1.png" 
+                src1="/achievement3.png" 
                 name1="Achievement3" 
-                desc1="You earned $1,000"
-                isDone1={true}
-                src2="/achievement1.png"
+                desc1="You have earned $1,000"
+                isDone1={false}
+                src2="/achievement4.png"
                 name2="Achievement4"
-                desc2="Crypto"
-                isDone2={true}
+                desc2="You have earned $5,000"
+                isDone2={false}
                 />
                 
                 {/* ================================= */}
                 {/* 3rd row */}
                 <Row 
-                src1="/achievement1.png" 
+                src1="/achievement5.png" 
                 name1="Achievement5" 
                 desc1="You have earned $10,000"
                 isDone1={false}
-                src2="/achievement1.png"
+                src2="/achievement6.png"
                 name2="Achievement6"
-                desc2="Tech Company"
-                isDone2={true}
+                desc2="You have earned $15,000"
+                isDone2={false}
                 />
                 
                 {/* ================================= */}
                 {/* 4th row */}
                 <Row 
-                src1="/achievement1.png" 
+                src1="/achievement7.png" 
                 name1="Achievement7" 
-                desc1="You have earned $50,000"
+                desc1="You have earned $20,000"
                 isDone1={false}
-                src2="/achievement1.png"
+                src2="/achievement8.png"
                 name2="Achievement8"
-                desc2="Health stock"
+                desc2="You have earned $25,000"
                 isDone2={false}
                 />
     
                 {/* ================================= */}
                 {/* 5th row */}
                 <Row 
-                src1="/achievement1.png" 
+                src1="/achievement9.png" 
                 name1="Achievement9" 
-                desc1="You have earned $100,000"
+                desc1="You have earned $30,000"
                 isDone1={false}
-                src2="/achievement1.png"
+                src2="/achievement10.png"
                 name2="Achievement10"
-                desc2="Foreign stock"
-                isDone2={true}
+                desc2="You have earned $35,000"
+                isDone2={false}
                 />
 
             </div> {/* End of Achievements Content */}

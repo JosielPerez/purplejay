@@ -68,6 +68,17 @@ function Sell({closeModal, stock, buyPower, setBuyPower}:any) {
     
     if(shareNumber != null)
     {
+
+      // stock.shares_owned -= shareNumber
+      // ==========================
+      // MODIFIED few lines below by REI:
+      const achievement2 = localStorage["achievement2"];
+      if(achievement2 != "true") {
+        localStorage.setItem("achievement2","true");
+      }
+      // MODIFY END.
+      // ===========================
+
       let current = new Date();
       let cDate = current.getHours() + ":" + current.getMinutes() + " " +
                   current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
@@ -86,6 +97,7 @@ function Sell({closeModal, stock, buyPower, setBuyPower}:any) {
       stock.shares_owned -= shareNumber;
       setAndSaveTransactions(transactions,(Number(buyPower)+amount),watchlist,(stock.shares_owned));
       setBuyPower(Number(buyPower)+amount)
+
     }
 
     setShareNumber(null);

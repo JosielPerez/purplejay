@@ -83,8 +83,19 @@ function Buy({closeModal, stock, buyPower, setBuyPower}:any) {
         time: cDate
       }
       setBuyPower(buyPower-amount)
+
+      // ==========================
+      // MODIFIED few lines below by REI:
+      const achievement1 = localStorage["achievement1"];
+      if(achievement1 != "true") {
+        localStorage.setItem("achievement1","true");
+      }
+      // MODIFY END.
+      // ===========================
+
       transactions.push(newTransaction)
       setAndSaveTransactions(transactions,(buyPower-amount),watchlist,(stock.shares_owned));
+
     }
     setShareNumber(0);
     setAmount(null)
