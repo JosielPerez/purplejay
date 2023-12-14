@@ -19,10 +19,13 @@
     "next": "^13.5.6",
     "firebase": "^10.5.2",
 
+    "mongodb": "^6.3.0",
+    "next": "^13.5.4",
 
     "plotly.js": "^2.27.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-google-charts": "^4.0.1",
     "react-modal": "^3.16.1",
     "react-plotly.js": "^2.6.0"
   },

@@ -1,0 +1,8 @@
+.transactionlist{
+    position: absolute;
+    justify-content: space-between;
+    left: 18%;
+}
+.transactionlist th{
+    padding: 0 5px 5px 5px;
+}
