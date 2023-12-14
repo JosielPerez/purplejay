@@ -54,7 +54,7 @@ function getUsername(){
     return username;
 }
 function getIncome(){
-    const income:Int32Array = localStorage["income"];
+    const income:Int32Array = localStorage["buyPower"];
     return income;
 }
 
@@ -242,10 +242,24 @@ function ResetButton(){
         // username & monthly income will be reset.
         // achievement & assets will be reset.
         localStorage.setItem("username", "PurpleJay");
-        localStorage.setItem("income", "0");
+        localStorage.setItem("buyPower", "1000");
         localStorage.setItem("achievement1", "false");
         localStorage.setItem("achievement2", "false");
+        let current = new Date();
+        let cDate =
+            current.getFullYear() +
+            "-" +
+            (current.getMonth() + 1) +
+            "-" +
+            current.getDate() + 
+            " " +
+            current.getHours() +
+            ":" + current.getMinutes() + 
+            ":" + current.getSeconds();
 
+        localStorage.setItem("watchlist", JSON.stringify([null]));
+        localStorage.setItem("balances", JSON.stringify([[cDate,1000]]));
+        localStorage.removeItem("transactions");
 
         setOpen(false);
     }
