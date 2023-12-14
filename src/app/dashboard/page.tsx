@@ -16,7 +16,6 @@ function Dashboard() {
 
   const API_KEY =  'WWN8JLPOQGO3WWTR' //'NF6LXRYWSZLD6W5D' //'OTGL48VF2QBKDZSK'
   let stockOptions = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "META", "JPM", "JNJ", "V", "PYPL", "BABA", "BAC", "INTC", "NFLX", "VZ", "CSCO", "XOM", "WMT", "HD", "DIS", "PFE", "CVX", "T", "MRK", "NVDA", "BA", "GS", "ORCL", "CRM", "ADBE", "CMCSA", "KO", "IBM", "UNH", "MCD", "HON", "PEP", "CAT", "TMO", "PM", "VRTX", "MA", "QCOM", "WFC", "AMGN", "ACN", "NKE", "SLB", "GILD", "TXN", "LLY", "MDLZ", "UTX", "ABT", "COST", "HDB", "MDT", "TSM", "DWDP", "AZN", "SAP"]
-  let stockSymbols = ["IBM"];
   
   // const fetchWatchlist = async () =>{
   //   const query = await fetch("http://localhost:3000/api/watchlist", {
@@ -30,6 +29,14 @@ function Dashboard() {
   // fetchWatchlist()
   
   const [stocks, setStocks] = useState(JSON.parse(localStorage.getItem('watchlist')));
+  let stockSymbols = [];
+  if (stocks[0] != null)
+  {
+    for (const element of stocks) {
+      stockSymbols.push(element.symbol);
+    }
+    
+  }
 
   const [tickerStock, setTickerStock] = useState([]);
   const [newStock,setNewStock] = useState('');
@@ -77,7 +84,7 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    if (stocks)
+    if (stocks!= null)
     {
       let stockList: any = [];
     // stockSymbols.forEach((symbol) => stockList.push(updateStock(symbol)));
@@ -256,7 +263,16 @@ function Dashboard() {
       const myStock = fetchStock(symbol)
       Promise.resolve(myStock)
       .then((result: StockItem) => {
-        setAndSaveStocks([...stocks,result]);
+        if(stocks[0] != null)
+        {
+          setAndSaveStocks([...stocks,result]);
+        }
+        else
+        {
+          setAndSaveStocks([result]);
+          setTickerStock(result);
+          setSelectedStock(result.symbol);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -291,10 +307,11 @@ function Dashboard() {
       setTickerStock(stock);
     }
 
+
   return (
     <>
       <AddStock newStock = {newStock} setNewStock={setNewStock} handleSubmit={handleSubmit}/>
-      <StockList stocks={stocks} selectedStock={selectedStock} handleSelect={handleSelect} />
+      <StockList stocks={stocks} setStocks = {setStocks} selectedStock={selectedStock} setSelectedStock={setSelectedStock} setTickerStock={setTickerStock} handleSelect={handleSelect} />
       <StockGraph
         stockChartXValues={stockChartXValues ? stockChartXValues : 0}
         stockChartYValues={stockChartYValues ? stockChartYValues : 0}
@@ -303,7 +320,7 @@ function Dashboard() {
         price={ tickerStock ? tickerStock.price : 0}
       />
       <TimeRange selectTimeOption={selectTimeOption} />
-      <label className={styles.buy_power}>Buy Power:   ${buyPower}</label>
+      <label className={styles.buy_power}>Buy Power:   ${(Number(buyPower)).toFixed(2)}</label>
       <button
         className={styles.stock_buy}
         onClick={() => {

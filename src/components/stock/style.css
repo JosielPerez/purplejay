@@ -18,12 +18,17 @@
   cursor: pointer;
   box-shadow: 0 0 20px #000;
 }
+.icon_adjust{
+  display: grid;
+  align-items: center;
+}
   
   #trend-up {
     width: 46px;
     min-width: 44px;
     height: 36px;
     color: #0ee3b8;
+    padding: 0;
   }
   
   #trend-down {
@@ -31,5 +36,19 @@
     min-width: 44px;
     height: 36px;
     color: #ff2400;
+  }
+  #delete{
+    width: 32px;
+    min-width: 30px;
+    height: 25px;
+    color: #ff2400;
+    cursor: pointer;
+  }
+  #normal{
+    visibility: hidden;
+    width: 32px;
+    min-width: 30px;
+    height: 25px;
+    color: grey;
   }
   
