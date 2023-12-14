@@ -4,16 +4,21 @@ import Stock from '../stock/Stock'
 import './style.css'
 
 
-function StockList({stocks, setTickerStock}:any) {
+function StockList({stocks, setStocks, selectedStock, setSelectedStock, setTickerStock, handleSelect}:any) {
   return (
     <ul className= "stocklist">
-        {stocks.map((stock) =>(
+        {stocks[0] == undefined ? 'No Stocks Added':
+        (stocks.map((stock) =>(
             <Stock
                 key={stock.symbol}
                 stock = {stock}
-                setTickerStock = {setTickerStock}
+                selectedStock={selectedStock}
+                setStocks= {setStocks}
+                setSelectedStock={setSelectedStock}
+                setTickerStock= {setTickerStock}
+                handleSelect = {handleSelect}
             />
-        ))}
+        )))}
     </ul>
   )
 }

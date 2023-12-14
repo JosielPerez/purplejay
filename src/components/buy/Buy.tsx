@@ -6,9 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Buy({closeModal, stock, buyPower, setBuyPower}:any) {
     
-  const [confirmPage, setConfirmPage] = useState(false)
-  const [amount,setAmount] = useState<number | null>()
+  const [confirmPage, setConfirmPage] = useState(false);
+  const [amount,setAmount] = useState<number | null>();
   const [shareNumber,setShareNumber] = useState(0);  
+  let transactions:any = JSON.parse(localStorage.getItem('transactions'))
+  if (transactions == null) transactions = []
+  let watchlist:any = JSON.parse(localStorage.getItem('watchlist'))
+
+  function updateSharesOwned( list:any, newSharesOwned:number)
+  {
+    for(let i =0; i< list.length;i++)
+    {
+      if ( list[i].symbol == stock.symbol) 
+        list[i].shares_owned = newSharesOwned
+    }
+  }
   
   function inputCheck (e:string | number): number {
         if (e != "") {
@@ -43,13 +55,35 @@ function Buy({closeModal, stock, buyPower, setBuyPower}:any) {
     setShareNumber(e/stock.price)
     setAmount(e)
   }
+  
+  const setAndSaveTransactions = (transactions:any, buyPower:any, watchlist:any, newSharesOwned:any)=>{
+    localStorage.setItem('transactions',JSON.stringify(transactions))
+    updateSharesOwned(watchlist,newSharesOwned)
+    localStorage.setItem('watchlist',JSON.stringify(watchlist))
+    localStorage.setItem('buyPower',buyPower)
+  }
 
   function handleConfirm()
   {
     stock.shares_owned += shareNumber
     if(amount != null)
     {
+      let current = new Date();
+      let cDate = current.getHours() + ":" + current.getMinutes() + " " +
+                  current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+            
+      let newTransaction = {
+        symbol: stock.symbol,
+        type: 'Buy',
+        shares: shareNumber,
+        price: Number(stock.price),
+        amount: amount,
+        total_shares: Number(stock.shares_owned),
+        buy_power: Number(buyPower)-amount,
+        time: cDate
+      }
       setBuyPower(buyPower-amount)
+
       // ==========================
       // MODIFIED few lines below by REI:
       const achievement1 = localStorage["achievement1"];
@@ -58,12 +92,15 @@ function Buy({closeModal, stock, buyPower, setBuyPower}:any) {
       }
       // MODIFY END.
       // ===========================
+
+      transactions.push(newTransaction)
+      setAndSaveTransactions(transactions,(buyPower-amount),watchlist,(stock.shares_owned));
+
     }
     setShareNumber(0);
     setAmount(null)
     setConfirmPage(false)
     closeModal(false);
-    console.log(buyPower);
   }
 return (
         <div className='modal'>

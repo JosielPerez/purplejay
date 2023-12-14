@@ -4,7 +4,9 @@ import'./style.css'
 function StockStats( {stock}:StockItem) {
   return (
             <div className='stats'>
-                <header className='stats_header'>Stats</header>
+                <header className='stats_header'>Stats:</header>
+                { stock == undefined ? 'Add a stock to watchlist for stats'
+                    :
                 <form className='stats_form'>
                     <label htmlFor='open' className='stats_label'>OPEN
                     <input type='text' id='open' name='open' value={stock.open}
@@ -32,6 +34,7 @@ function StockStats( {stock}:StockItem) {
                         className='stats_input' readOnly/>
                     </label>
                 </form>
+                }
             </div>
         )
 }
