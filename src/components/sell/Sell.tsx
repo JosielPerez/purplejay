@@ -69,7 +69,7 @@ function Sell({closeModal, stock, buyPower, setBuyPower}:any) {
     if(shareNumber != null)
     {
 
-      stock.shares_owned -= shareNumber
+      // stock.shares_owned -= shareNumber
       // ==========================
       // MODIFIED few lines below by REI:
       const achievement2 = localStorage["achievement2"];
