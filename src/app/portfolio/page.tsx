@@ -177,7 +177,7 @@ function Portfolio() {
         <PortfolioTimeRange selectTimeOption={selectTimeOption}/>
         <label className={styles.all_time_return}>
           All Time Return:   
-          <span style={{color:(allTimeReturn > 0 ? 'green':'red') }}> ${(Math.abs(allTimeReturn)).toFixed(2)}</span>
+          <span style={{color:(allTimeReturn < 0.00 ? 'red':'green') }}> ${(Math.abs(allTimeReturn)).toFixed(2)}</span>
         </label>
         <TransactionList transactions = {transactions}/>
         <PieChart pieChartData = {pieChartData}/>
