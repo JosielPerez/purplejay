@@ -131,12 +131,12 @@
 .profile_income_editing {
     position:absolute;
     align-self: center;
-    margin-left: 14vw;
+    margin-left: 13vw;
 }
 .profile_editing {
     position: absolute;
     align-self: center;
-    margin-left: 44vw;
+    margin-left: 43vw;
 }
 
 .profile_income_editing:hover {
@@ -152,6 +152,19 @@
     filter:brightness(20%);
 }
 
+.edit_button {
+    background-color: #6237a0;
+}
+.edit_button:hover {
+    background-color: #b88cf6;
+}
+.edit_button:active {
+    background-color: #6237a0;
+}
+
+.dialog_box {
+    width: 38vw;
+}
 
 
 /*=====================================*/
