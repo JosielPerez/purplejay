@@ -39,10 +39,32 @@ function Portfolio() {
     if(cash == null) cash = 1000;
     const buyPower = cash
 
+  function  calculateAllTimeReturn(elements) {
+      let totalValue = 0;
+
+      for (const element of elements) {
+          if (element.type === 'Buy') {
+              totalValue -= element.amount;
+          } else if (element.type === 'Sell') {
+              totalValue += element.amount;
+          }
+      }
+
+      return totalValue;
+  }
+    
+    let returns = 0 
+    if(transactions != undefined)
+    {
+      returns = calculateAllTimeReturn(transactions)
+    }
+
+    const [allTimeReturn, setAllTimeReturn] = useState(returns)
     const API_KEY =  'WWN8JLPOQGO3WWTR'
     const balances:any = JSON.parse(localStorage.getItem('balances'))
     const [stockChartXValues, setStockChartXValues] = useState(balances.map(tuple => tuple[0]));
     const [stockChartYValues, setStockChartYValues] = useState(balances.map(tuple => tuple[1]));
+    const [currentBalance,setCurrentBalance] = useState(balances[balances.length-1][1])
     const [pieChartData, setPieChartData] = useState([])
 
     const stocks = JSON.parse(localStorage.getItem('watchlist'));
@@ -56,11 +78,6 @@ function Portfolio() {
       }
     
     }
-    
-    let cash_return = localStorage.getItem('allTimeReturn')
-    if(cash_return == null) cash_return = 0;
-    const [allTimeReturn, setAllTimeReturn] = useState(cash_return);
-
     
     function selectTimeOption(option){
 
@@ -132,6 +149,7 @@ function Portfolio() {
             setPieChartData(newPieChartData)
             setStockChartXValues([...stockChartXValues,cDate])
             setStockChartYValues([...stockChartYValues,totalStockValue])
+            setCurrentBalance(totalStockValue)
   
             newBalances.push([cDate,totalStockValue])
             localStorage.setItem('balances',JSON.stringify(newBalances))
@@ -154,9 +172,13 @@ function Portfolio() {
         timeOption={timeOption} 
         stockChartXValues={stockChartXValues ? stockChartXValues : 0}
         stockChartYValues={stockChartYValues ? stockChartYValues : 0}
+        title = {currentBalance}
         />
         <PortfolioTimeRange selectTimeOption={selectTimeOption}/>
-        <label className={styles.all_time_return}>All Time Return:   ${allTimeReturn}</label>
+        <label className={styles.all_time_return}>
+          All Time Return:   
+          <span style={{color:(allTimeReturn < 0.00 ? 'red':'green') }}> ${(Math.abs(allTimeReturn)).toFixed(2)}</span>
+        </label>
         <TransactionList transactions = {transactions}/>
         <PieChart pieChartData = {pieChartData}/>
     </div>

@@ -3,7 +3,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import './style.css';
 
-function PortfolioGraph({timeOption, stockChartXValues, stockChartYValues }) {
+function PortfolioGraph({timeOption, title, stockChartXValues, stockChartYValues }) {
 
   return (
     <div>
@@ -26,10 +26,10 @@ function PortfolioGraph({timeOption, stockChartXValues, stockChartYValues }) {
             l: 0,
           },
           title: {
-            text: 'Balance',
+            text: 'Asset Balance: $'+title,
             x: 0.04,
             font:{
-              size: 26,
+              size: 23,
               color: '#6237a0'
             },
             y:0.975,
