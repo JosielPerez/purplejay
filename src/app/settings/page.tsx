@@ -41,7 +41,7 @@ function getUserEmail(){
 }
 
 function isIncomeEdit(inputType:string){
-    if(inputType=="Income"){
+    if(inputType=="Buy Power"){ // changed to Income => Buy Power
         return styles.profile_income_editing;
     }
     else {
@@ -69,7 +69,7 @@ function Editing(inputType:string){
     const auth = getAuth();
 
     const setValue = (value: any, inputType:string) => {
-        if(inputType == "Income"){
+        if(inputType == "Buy Power"){ // changed to Income => Buy Power
             console.log("setting income...");
             setIncome(value);
         } 
@@ -129,7 +129,6 @@ function Editing(inputType:string){
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClickClose = () => {
         setOpen(false);
     };
@@ -332,7 +331,7 @@ export default function settings() {
                     </div>
                     <div className={styles.profile_income_box}>
                         <p>${getIncome()}</p>
-                        {Editing("Income")}
+                        {Editing("Buy Power")} {/*changed to Income => Buy Power*/}
                     </div>
                 </div>
             </div>
