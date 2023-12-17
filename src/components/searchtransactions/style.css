@@ -1,0 +1,22 @@
+.search_transactions {
+    position: absolute;
+    left: 17%;
+    top:    60.5%;
+    width: 600px;
+    height: 70px;
+    margin: 0.25rem 0 0;
+    padding: 0 0.5rem 0.25rem;
+  }
+  
+.search_transactions input[type='text'] {
+    width: 495px;
+    min-height: 28px;
+    font-size: 16.5px;
+    padding: 0.5rem;
+    margin-bottom: 5px;
+    outline: none;
+  }
+
+  .search_transactions label{
+    display: none;
+  } 

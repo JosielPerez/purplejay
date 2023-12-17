@@ -6,6 +6,7 @@ import PortfolioTimeRange from '@/components/portfoliotimerange/PortfolioTimeRan
 import TransactionList from '@/components/transactionlist/TransactionList';
 import styles from "./styles.module.css";
 import PieChart from '@/components/piechart/PieChart';
+import SearchTransactions from '@/components/searchtransactions/SearchTransactions';
 
 function Portfolio() {
   let current = new Date();
@@ -34,6 +35,7 @@ function Portfolio() {
 
     const[timeOption,setTimeOption] = useState([startTime,endTime]);
     const[transactions,setTransactions]= useState(JSON.parse(localStorage.getItem('transactions')));
+    const[searchTransactions, setSearchTransactions] = useState('')
 
     let cash = localStorage.getItem('buyPower')
     if(cash == null) cash = 1000;
@@ -164,6 +166,16 @@ function Portfolio() {
       useEffect(() => {
         fetchStockBalances();
       }, []);
+
+    function filterTransctions(transactions)
+    {
+      if (searchTransactions != '')
+      {
+        return transactions.filter(transaction =>((transaction.symbol).toLowerCase()) == (searchTransactions.toLowerCase()))
+      }
+      
+      return transactions
+    }
     
 
   return (
@@ -179,7 +191,8 @@ function Portfolio() {
           All Time Return:   
           <span style={{color:(allTimeReturn < 0.00 ? 'red':'green') }}> ${(Math.abs(allTimeReturn)).toFixed(2)}</span>
         </label>
-        <TransactionList transactions = {transactions}/>
+        <SearchTransactions searchTransactions = {searchTransactions} setSearchTransactions={setSearchTransactions}/>
+        <TransactionList transactions = {transactions ? filterTransctions(transactions): transactions}/>
         <PieChart pieChartData = {pieChartData}/>
     </div>
   )
