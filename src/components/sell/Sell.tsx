@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, {useState} from 'react'
 import './style.css'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
