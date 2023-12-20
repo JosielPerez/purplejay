@@ -26,7 +26,7 @@ You will need several files to install before you start the application:
 
 <br />
 inside of `.env.local` should look something like this:
-```bash
+```
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyDAPW_kPfXthEIhEwbm-_uXTNd0e1dbKhs
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=purplejay-4282c.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=purplejay-4282c
@@ -39,11 +39,12 @@ MONGODB_URI=mongodb+srv://username:password@cluster0.f0xoazh.mongodb.net/PurpleJ
 
 <br />
 inside of `/purplejay/src/app/dashboard/page.tsx` should look like this:
-```bash
+```
 function Dashboard() {
 
   const API_KEY =  'put key string here';
 ```
+
 <br />
 <br />
 
@@ -51,7 +52,7 @@ function Dashboard() {
 ## Getting Started
 First, run the development server:
 
-```bash
+```
 npm run dev
 # or
 yarn dev
