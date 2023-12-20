@@ -25,7 +25,8 @@ You will need several files to install before you start the application:
 5. purchase real-time data API from [Alpha Vantage](https://www.alphavantage.co/) and put API_KEY into the file named `/purplejay/src/app/dashboard/page.tsx`
 
 <br />
-inside of `.env.local` should look something like this:
+
+inside of `.env.local` should look something like this: <br />
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyDAPW_kPfXthEIhEwbm-_uXTNd0e1dbKhs
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=purplejay-4282c.firebaseapp.com
@@ -38,10 +39,10 @@ MONGODB_URI=mongodb+srv://username:password@cluster0.f0xoazh.mongodb.net/PurpleJ
 ```
 
 <br />
-inside of `/purplejay/src/app/dashboard/page.tsx` should look like this:
+
+inside of `/purplejay/src/app/dashboard/page.tsx` should look like this: <br />
 ```
 function Dashboard() {
-
   const API_KEY =  'put key string here';
 ```
 
@@ -54,11 +55,11 @@ First, run the development server:
 
 ```
 npm run dev
-# or
+or
 yarn dev
-# or
+or
 pnpm dev
-# or
+or
 bun dev
 ```
 
